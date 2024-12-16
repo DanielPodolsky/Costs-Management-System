@@ -1,0 +1,115 @@
+You need to connect to the database
+You need to handle connection errors
+You need to perform various operations (adding data, retrieving data, updating data)
+You need to handle errors for each operation
+You might need to perform the same operations in different parts of your application
+
+Without a class, you would need to write similar code multiple times across your application.
+Each time you want to connect to the database or perform an operation, you'd need to write the same 
+error handling and connection logic.
+
+------------------------------------ 16/12 ------------------------------------
+- This is good when we are dealing with multiple pages because we won't need to repeat our code (Class for DB).
+- For now (16/12) we will write the code without using a class.
+- The reason for separating these files (app.js, database.js) is important - it helps us keep our
+database operations organized in one place, separate from our application logic.
+Think of it like keeping all your kitchen tools in the kitchen, rather than scattered throughout the house.
+
+In database.js:
+1. Opening a connection to our database
+2. Setting up our data storage structure when the database is first created
+3. Creating functions for adding and retrieving cost data
+
+Step 1: Opening a Database Connection
+Think of this like opening a new filing cabinet for the first time. We need to:
+
+Name our database
+Specify a version number (helps us track when we make changes to the structure)
+Handle what happens if the connection fails (like having a backup plan if the cabinet is locked).
+
+ - We first checked the kind of indexedDB
+ (const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;)
+ - We've established the connection to our database, called "CostsManagement"
+ (const request = indexedDB.open("CostsManagement", 1);)
+ - We've handled what happens if the connection failed
+ (request.onerror = function(event) {
+    console.error("An error occurred with indexedDB");
+    console.error(event);
+};)
+
+Step 2: Setting Up Data Storage Structure
+This is like deciding how to organize our filing cabinet. When the database is first created, we need to:
+
+Create a "store" for our costs (like creating a drawer in the cabinet)
+Define what information we'll store about each cost (amount, category, description)
+Set up "indexes" to help find information quickly (like adding tabs to quickly find specific types of files)
+
+This step only happens when:
+
+The database is created for the first time
+We update the database version number
+
+- We've created an onupgradeneeded which happens on the first run or on any version upgrade.
+(request.onupgradeneeded)
+- Inside that, we got a reference to the database
+(const db = request.result;)
+- After that, we created a store named "costs"
+(const store = db.createObjectStore("costs", { keyPath: "id"});)
+- We are NOT going to set up indexes yet because we are working on the add feature for now.
+
+
+Step 3: Creating Database Operation Functions
+Each operation function is going to be inside the onsuccess handler.
+Each operation function is needed to be a Promise because it takes time!
+These are the actions we'll perform regularly, like:
+
+Adding new costs (putting a new file in the cabinet)
+Getting costs for a specific month (finding all files from a particular time)
+Calculating totals (summarizing the information in our files)
+
+Each function (Only addCost for now) needs to:
+
+Connect to the database - Done
+Perform its specific task - Done
+Handle any errors that might occur - Done
+Return the results - Done (Added to IndexedDB)
+
+- We've added the onsuccess handler
+(request.onsuccess)
+- We got a reference to the database
+(const db = request.result;)
+- We're going to create a function outside the onsuccess handler:
+(function addCost(costData) {})
+- We've added addCost to be a global function so other .js files could use it.
+(window.addCost = async function(costData) {})
+- Inside addCost we've added a global variable called currentID which will start at -1
+(let currentId = -1; // Used for database's ID.)
+
+-- CHANGES:
+- Moved currentId to be in the app.js and not in the database, because we 
+  create the final object there, and it should be easier to work with there.
+
+
+
+------------------------------------ HELPER FOR 16/12 ------------------------------------
+
+The key differences are:
+
+With Promises, we can WAIT for the operation to complete using await
+We can properly handle success and error cases
+We can be sure our data was actually saved before moving on
+Code that depends on the save being complete won't run until it's actually complete
+
+Think of it like the difference between:
+
+WITHOUT Promise: Yelling your order while running past a restaurant
+WITH Promise: Properly ordering and waiting for confirmation
+
+The Promise version gives us a proper way to:
+
+Start the operation
+Wait for it to complete
+Know if it succeeded or failed
+Get the results or handle the error
+Move on only when we're ready
+
