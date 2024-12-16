@@ -1,1 +1,1 @@
-# Frontend-Project-College
+# Costs Management System
