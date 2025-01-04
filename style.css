@@ -1,15 +1,120 @@
-* {
-    background-color: gray;
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Urbanist", sans-serif;
 }
+
+:root {
+    /* Primary Colors */
+    --background-main: #282827;     /* Slightly darker than navbar for depth */
+    --background-secondary: #1e1e1e; /* For cards and sections */
+    --background-elevated: #242424;  /* For hover states and highlights */
+    
+    /* Text Colors */
+    --text-primary: #ffffff;         /* For important text */
+    --text-secondary: #b3b3b3;      /* For less emphasis */
+    --text-muted: #808080;          /* For subtle text */
+    
+    /* Accent Colors */
+    --accent-primary: #7c4dff;      /* Your navbar active state purple */
+    --accent-secondary: #9669ff;     /* Lighter purple for hover states */
+    --accent-success: #4caf50;       /* Green for success states */
+    --accent-error: #f44336;         /* Red for errors */
+}
+
+body {
+    background-color: var(--background-main);
+    color: var(--text-primary);
+}
+
+/* Form elements */
+input, select, textarea {
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--background-elevated);
+    padding: 0.75rem;
+    border-radius: 4px;
+}
+
+/* Form labels */
+label {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
 
 .form-group {
     /* border: 1px solid blue; */
 }
 
+section {
+    margin: 16px 32px 0;
+}
 
-.cost-form {
+
+.form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     gap: 15px;
+}
+
+.navbar {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    color: #fff;
+}
+
+.nav-link:hover {
+    background-color: #333333;
+}
+
+.nav-link.active {
+    border-bottom: 3px solid #7c4dff;
+}
+
+.nav-link:visited {
+    color: white;              /* Keeps the same color as unvisited */
+}
+
+.submitBtn {
+}
+
+.input-group {
+    justify-self: center;
+    align-self: center;
+}
+
+#generateReportSection {
+    display: none;
+}
+
+.chart-container {
+    height: 400px;
+    width: 400px;
+    margin: 0 auto;
 }

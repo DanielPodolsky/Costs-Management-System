@@ -15,7 +15,7 @@ request.onerror = function(event) {
 // A function that gets run whenever a NEW database is created OR an existing database's version number has changed.
 request.onupgradeneeded = function() {
     const db = request.result; // Reference to the result -> Cars Database
-    const store = db.createObjectStore("costs", { keyPath: "id"}); // We're going to store our cars here, keyPath is the primary key (ID, it's unique).
+    const store = db.createObjectStore("costs", { keyPath: "id"}); // We're going to store our costs here, keyPath is the primary key (ID, it's unique).
     /* store.createIndex("cars_colour", ["colour"], { unique: false }); // Index on the colour of the car, so we can look up cars by their colours.
     store.createIndex("colour_and_make", ["colour", "make"], { unique: false }); // Compound index = Combination of more than one keys to make up a new index. (Both the colour and the maker of the vehicle; search for all the red mazdas for example) */
 
@@ -40,10 +40,8 @@ request.onsuccess = function() {
             }
     
             try {
-                // Start a transaction - like opening the filing cabinet
                 const transaction = db.transaction(['costs'], 'readwrite');
                 
-                // Get the store - like finding the right drawer
                 const store = transaction.objectStore('costs');
     
                 // Add the data to the store
@@ -65,5 +63,53 @@ request.onsuccess = function() {
             }
         });
     }
+
+
+    // In database.js
+    window.getCostsByTime = async function(month, year) {
+        return new Promise((resolve, reject) => {
+            if (!db) {
+                reject(new Error('Database not initialized'));
+                return;
+            }
+
+            try {
+                const transaction = db.transaction(['costs'], 'readonly');
+                const store = transaction.objectStore('costs');
+                const categoryTotals = {};
+
+                // Get all costs and filter them by month and year
+                const request = store.openCursor();
+                
+                request.onsuccess = (event) => {
+                    const cursor = event.target.result;
+                    if (cursor) {
+                        const cost = cursor.value;
+                        const costDate = new Date(cost.date);
+                        
+                        // Check if this cost belongs to our selected month and year
+                        if (costDate.getMonth() == month && 
+                            costDate.getFullYear() == year) {
+                            // Add to category total
+                            if (!categoryTotals[cost.category]) {
+                                categoryTotals[cost.category] = 0;
+                            }
+                            categoryTotals[cost.category] += Number(cost.amount);
+                        }
+                        cursor.continue();
+                    } else {
+                        resolve(categoryTotals);
+                    }
+                };
+
+                request.onerror = () => {
+                    reject(request.error);
+                };
+
+            } catch (error) {
+                reject(error);
+            }
+        });
+    };
 }
 

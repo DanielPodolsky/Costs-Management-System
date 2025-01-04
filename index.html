@@ -7,57 +7,93 @@
    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <form id="costEntryForm" class="cost-form">
-      <!-- Required Fields -->
-      <div class="form-group">
-          <label for="amount">Amount</label>
-          <input type="number" id="amount" step="0.01" min="0" required>
-      </div>
-  
-      <div class="form-group">
-          <label for="category">Category</label>
-          <select id="category" required>
-              <option value="">Select a category</option>
-              <option value="groceries">Groceries</option>
-              <option value="utilities">Utilities</option>
-              <option value="transportation">Transportation</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="healthcare">Healthcare</option>
-              <option value="education">Education</option>
-          </select>
-      </div>
-  
-      <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" required></textarea>
-      </div>
-  
-      <!-- Additional Valuable Fields -->
-      <div class="form-group">
-          <label for="date">Date</label>
-          <input type="date" id="date" required>
-          <!-- Default to today's date in JavaScript -->
-      </div>
-  
-      <div class="form-group">
-          <label for="paymentMethod">Payment Method</label>
-          <select id="paymentMethod" required>
-              <option value="">Select payment method</option>
-              <option value="cash">Cash</option>
-              <option value="credit">Credit Card</option>
-              <option value="debit">Debit Card</option>
-              <option value="transfer">Bank Transfer</option>
-          </select>
-      </div>
-  
-  
-      <button type="submit">Add Cost</button>
-  </form>
+    <!-- Nav Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Cost Manager</div>
+        <div class="nav-links">
+            <a href="#" id="addCostLink" class="nav-link active">Add Cost</a>
+            <a href="#" id="generateReportLink" class="nav-link">Generate Report</a>
+        </div>
+    </nav>
+
+    <section id="addCostSection">
+        <!-- Form -->
+        <form id="costEntryForm" class="form">
+            <!-- Required Fields -->
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="education">Education</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" required></textarea>
+            </div>
+
+            <!-- Additional Valuable Fields -->
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+                <!-- Default to today's date in JavaScript -->
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" required>
+                    <option value="">Select payment method</option>
+                    <option value="cash">Cash</option>
+                    <option value="credit">Credit Card</option>
+                    <option value="debit">Debit Card</option>
+                    <option value="transfer">Bank Transfer</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+            <button type="submit" class="submitBtn">Add Cost</button>
+            </div>
+            
+        </form>
+    </section>
+    
+    <section id="generateReportSection">
+        <form id="reportForm" class="form">
+            <div class="input-group">
+                <label for="monthPicker">Select Month and Year:</label>
+                <input 
+                    type="month" 
+                    id="monthPicker" 
+                    name="monthPicker"
+                    required
+                >
+                <br>
+                <button type="submit">Generate me a report!</button>
+            </div>
+        </form>
+
+        <div class="chart-container">
+            <canvas id="costChart"></canvas>
+        </div>
+    </section>
 
 
    <!-- Load database.js first -->
    <script src="database.js"></script>
    <!-- Then load app.js -->
    <script src="app.js"></script>
+   <!-- NPM's Chart -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
