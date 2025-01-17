@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Urbanist", sans-serif;
+}
+
+:root {
+    /* Primary Colors */
+    --background-main: #F4F3F1;     /* Slightly darker than navbar for depth */
+    --background-secondary: #1e1e1e; /* For cards and sections */
+    --background-elevated: #242424;  /* For hover states and highlights */
+    
+    /* Text Colors */
+    --text-primary: #484646;         /* For important text */
+    --text-secondary: #AFAFAE;      /* For less emphasis */
+    --text-muted: #808080;          /* For subtle text */
+    
+    /* Accent Colors */
+    --accent-primary: #7c4dff;      /* Your navbar active state purple */
+    --accent-secondary: #9669ff;     /* Lighter purple for hover states */
+    --accent-success: #4caf50;       /* Green for success states */
+    --accent-error: #f44336;         /* Red for errors */
+}
+
+body {
+    background-color: var(--background-main);
+    background-image: url("./assets/pic-1.png");
+    background-position: bottom right;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Form elements */
+input, select, textarea {
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--background-elevated);
+    padding: 0.75rem;
+    border-radius: 4px;
+}
+
+/* Form labels */
+label {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+
+section {
+    padding: 1rem 2rem;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    justify-self: center;
+    align-self: center;
+}
