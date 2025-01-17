@@ -151,3 +151,18 @@ Data Management: Understanding how to organize and retrieve data effectively
 DOM Manipulation: Learning how to update the page content dynamically
 Error Handling: Implementing robust error checking throughout our application
 
+------------------------------------ 17/1 ------------------------------------
+
+UPGRADING TO REACT.
+
+npm install chart.js
+
+Add Cost component is done.
+Navbar component is done.
+
+Generate Report component is done.
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+
+Need to work on UI.
