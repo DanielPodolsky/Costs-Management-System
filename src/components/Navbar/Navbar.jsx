@@ -13,10 +13,10 @@ function Navbar( { activeSection, onSectionChange } ) {
             <nav className="navbar">
                 <div className="nav-brand">Cost Manager</div>
                 <div className="nav-links">
-                    <a href="#" id="addCostLink" className={`nav-link ${activeSection === 'add-cost' ? 'active' : '' } btn4`} onClick={() => handleClick('add-cost')}>
+                    <a href="#" id="addCostLink" className={`nav-link ${activeSection === 'add-cost' ? 'active' : '' } btn`} onClick={() => handleClick('add-cost')}>
                         Add Cost
                     </a>
-                    <a href="#" id="generateReportLink" className={`nav-link ${activeSection === 'generate' ? 'active' : '' } btn4`} onClick={() => handleClick('generate')}>
+                    <a href="#" id="generateReportLink" className={`nav-link ${activeSection === 'generate' ? 'active' : '' } btn`} onClick={() => handleClick('generate')}>
                         Generate Report
                     </a>
                 </div>

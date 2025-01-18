@@ -11,6 +11,25 @@ import {
   InputLabel,
 } from "@mui/material";
 import dayjs from "dayjs"; // Import dayjs for date handling
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import { 
+  ShoppingCart,  // for groceries
+  Power,         // for utilities
+  DirectionsCar, // for transportation
+  Theaters,      // for entertainment
+  LocalHospital, // for healthcare
+  School,         // for education
+  Payments,      // for the default/select option
+  Money,         // for cash
+  CreditCard,    // for credit card
+  PaymentsTwoTone, // for debit card
+  AccountBalance  // for bank transfer
+} from '@mui/icons-material';
+import { Category } from '@mui/icons-material';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
+import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
+import AddCardRoundedIcon from '@mui/icons-material/AddCardRounded';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 function AddCostSection() {
   const [formData, setFormData] = useState({
@@ -64,72 +83,109 @@ function AddCostSection() {
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          "& .MuiFormControl-root": { mb: 2, width: "100%" },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          alignItems: 'center',
+          '& .MuiFormControl-root': { 
+            width: '400px'  // Fixed width for all form controls
+          },
+          '& .MuiTextField-root': {
+            width: '400px'  // Same width for TextFields
+          },
+          '& .MuiBox-root': {
+            width: '400px'  // Same width for nested Box components
+          },
+          '& .MuiInputLabel-root': {  // Will style all input labels
+            fontWeight: 700,
+            fontFamily: '"Dancing Script", serif',
+            fontOpticalSizing: 'auto'
+          },
         }}
       >
-        <TextField
-          label="Amount"
-          type="number"
-          required
-          onChange={handleInputChange}
-          name="amount"
-          value={formData.amount}
-        />
 
-        <FormControl required>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <AttachMoneyRoundedIcon sx={{ color: 'action.active', ml: 1, mr: 1, my: 0.5 }} />
+          <TextField id="amount" label="Amount" variant="filled" type="number" required onChange={handleInputChange} name="amount" value={formData.amount}/>
+        </Box>
+
+        <Box sx={{ display: 'flex', alignItems: 'center'}}>
+          <Category sx={{ color: 'action.active', ml: 1, mr: 1, my: 0.5 }} />
+          <FormControl required>
           <InputLabel>Category</InputLabel>
           <Select
+            id="category"
             label="Category"
             onChange={handleInputChange}
             name="category"
             value={formData.category}
+            variant="filled"
           >
-            <MenuItem value="">Select a category</MenuItem>
-            <MenuItem value="groceries">Groceries</MenuItem>
-            <MenuItem value="utilities">Utilities</MenuItem>
-            <MenuItem value="transportation">Transportation</MenuItem>
-            <MenuItem value="entertainment">Entertainment</MenuItem>
-            <MenuItem value="healthcare">Healthcare</MenuItem>
-            <MenuItem value="education">Education</MenuItem>
+            <MenuItem value=""><em>Select a category</em></MenuItem>
+            <MenuItem value="groceries">
+              <ShoppingCart sx={{ mr: 1 }} /> Groceries
+            </MenuItem>
+            <MenuItem value="utilities">
+              <Power sx={{ mr: 1 }} /> Utilities
+            </MenuItem>
+            <MenuItem value="transportation">
+              <DirectionsCar sx={{ mr: 1 }} /> Transportation
+            </MenuItem>
+            <MenuItem value="entertainment">
+              <Theaters sx={{ mr: 1 }} /> Entertainment
+            </MenuItem>
+            <MenuItem value="healthcare">
+              <LocalHospital sx={{ mr: 1 }} /> Healthcare
+            </MenuItem>
+            <MenuItem value="education">
+              <School sx={{ mr: 1 }} /> Education
+            </MenuItem>
           </Select>
         </FormControl>
+        </Box>
 
-        <TextField
-          label="Description"
-          multiline
-          rows={4}
-          required
-          onChange={handleInputChange}
-          name="description"
-          value={formData.description}
-        />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <CreateRoundedIcon sx={{ color: 'action.active', ml: 1, mr: 1, my: 0.5 }} />
+          <TextField id="description" label="Description" multiline required onChange={handleInputChange} name="description" value={formData.description} variant="filled"/>
+        </Box>
 
-        <TextField
-          label="Date"
-          type="date"
-          required
-          onChange={handleInputChange}
-          name="date"
-          value={formData.date}
-        />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <EventAvailableRoundedIcon sx={{ color: 'action.active', ml: 1, mr: 1, my: 0.5 }} />
+          <TextField id="date" type="date" required onChange={handleInputChange} name="date" value={formData.date} variant="filled"/>
+        </Box>
 
-        <FormControl required>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <AddCardRoundedIcon sx={{ color: 'action.active', ml: 1, mr: 1, my: 0.5 }} />
+          <FormControl required>
           <InputLabel>Payment Method</InputLabel>
           <Select
+            id="payment-method"
             label="Payment Method"
             onChange={handleInputChange}
             name="paymentMethod"
             value={formData.paymentMethod}
+            variant="filled"
           >
-            <MenuItem value="">Select payment method</MenuItem>
-            <MenuItem value="cash">Cash</MenuItem>
-            <MenuItem value="credit">Credit Card</MenuItem>
-            <MenuItem value="debit">Debit Card</MenuItem>
-            <MenuItem value="transfer">Bank Transfer</MenuItem>
+            <MenuItem value="">
+              <Payments sx={{ mr: 1 }} /> Select payment method
+            </MenuItem>
+            <MenuItem value="cash">
+              <Money sx={{ mr: 1 }} /> Cash
+            </MenuItem>
+            <MenuItem value="credit">
+              <CreditCard sx={{ mr: 1 }} /> Credit Card
+            </MenuItem>
+            <MenuItem value="debit">
+              <PaymentsTwoTone sx={{ mr: 1 }} /> Debit Card
+            </MenuItem>
+            <MenuItem value="transfer">
+              <AccountBalance sx={{ mr: 1 }} /> Bank Transfer
+            </MenuItem>
           </Select>
         </FormControl>
+        </Box>
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button type="submit" variant="contained" color="success" endIcon={<EmojiEmotionsIcon/>}>
           Add Cost
         </Button>
       </Box>

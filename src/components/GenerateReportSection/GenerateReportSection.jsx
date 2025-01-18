@@ -2,8 +2,17 @@ import './GenerateReportSection.css'
 import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import { dbService } from '../../scripts/database.js';
-import { Button } from '@mui/material';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import { MonthCalendar } from '@mui/x-date-pickers/MonthCalendar';
+import {
+    TextField,
+    Select,
+    MenuItem,
+    Button,
+    Box,
+    FormControl,
+    InputLabel,
+  } from "@mui/material";
 
 function GenerateReportSection() {
     const chartRef = useRef(null);
@@ -41,13 +50,13 @@ function GenerateReportSection() {
                     responsive: true,
                     plugins: {
                         legend: {
-                            position: 'right',
-                            labels: { color: '#ffffff' }
+                            position: 'top',
+                            labels: { color: '#484646' }
                         },
                         title: {
                             display: true,
                             text: `Expenses by Category - ${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`,
-                            color: '#ffffff'
+                            color: '#484646'
                         }
                     }
                 }
@@ -68,27 +77,57 @@ function GenerateReportSection() {
     return (
         <>
             <section>
-                <form onSubmit={handleSubmit} className="form">
-                    <div className="input-group">
-                        <label htmlFor="monthPicker">Select Month and Year:</label>
-                        <input 
-                            type="month" 
-                            id="monthPicker" 
-                            name="monthPicker" 
-                            required 
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '15px',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Box sx={{ 
+                        display: 'flex', 
+                        flexDirection: 'column',
+                        gap: '15px',
+                        width: '400px'
+                        }}
+                    >
+                        <TextField
+                        id="monthPicker"
+                        label="Select Month and Year"
+                        type="month"
+                        required
+                        fullWidth
+                        variant="filled"  // To match your other inputs
+                        sx={{
+                            '& .MuiInputLabel-root': {  // This targets the label
+                              fontWeight: 400,
+                              fontFamily: '"Dancing Script", serif',
+                              fontOpticalSizing: 'auto',
+                            }
+                          }}
                         />
                         <Button startIcon={<SummarizeIcon/>}
                             type="submit"
                             variant='contained'
-                            color='primary'
+                            color='success'
+                            sx={{ width: 'auto', alignSelf: 'center' }}
                         >
                             Generate me a report!
                         </Button>
-                    </div>
-                </form>
-                <div className="chart-container">
-                    <canvas ref={chartRef} />
-                </div>
+
+
+                        <Box 
+                            sx={{
+                                mt: 2  // margin top
+                            }}
+                        >
+                            <canvas ref={chartRef} className='chart-container' />
+                        </Box>
+                    </Box>
+                </Box>
             </section>
         </>
     );
