@@ -2,6 +2,7 @@
 
 A user-friendly React application designed to help clients track and visualize their expenses efficiently. This system provides an intuitive interface for recording expenses and generating insightful spending reports.
 
+Visit the site: https://danielpodolsky.github.io/Costs-Management-System/#
 ## Key Features
 
 ### 1. Expense Recording
