@@ -30,6 +30,7 @@ import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 import EventAvailableRoundedIcon from '@mui/icons-material/EventAvailableRounded';
 import AddCardRoundedIcon from '@mui/icons-material/AddCardRounded';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import rightArrow from '../../assets/right-arrow.png';
 
 function AddCostSection() {
   const [formData, setFormData] = useState({
@@ -78,7 +79,36 @@ function AddCostSection() {
   };
 
   return (
-    <section id="addCostSection">
+    <section id="addCostSection" style={{ position: 'relative', minHeight: '100px' }}>
+      <Box className="description-helper" style={{ 
+        position: 'absolute', 
+        display: 'flex', 
+        alignItems: 'center',
+        height: '100%',         // This gives the flex container a height
+        width: '33%',
+        flexDirection: 'column',
+        gap: '15px',
+      }}>
+        <h2>Track Your Expenses with Ease</h2>
+        <p>
+          Welcome to your personal expense tracker! Add your daily expenses in just a few clicks. Simply enter the amount, choose a category, and provide a brief description. Whether it's your morning coffee or monthly bills, organizing your finances has never been simpler.
+        </p>
+        <p>
+          To get started:
+          <br></br>
+          1. Enter the expense amount
+          <br></br>
+          2. Select a spending category
+          <br></br>
+          3. Add a short description to help you remember
+          <br></br>
+          4. Pick the date of the transaction
+          <br></br>
+          5. Choose your payment method
+        </p>
+        <img src={rightArrow} alt="Right Arrow pointing to the form to fill, to add a new cost" className="rightArrowPic"/>
+      </Box>
+      
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -98,7 +128,7 @@ function AddCostSection() {
           },
           '& .MuiInputLabel-root': {  // Will style all input labels
             fontWeight: 700,
-            fontFamily: '"Dancing Script", serif',
+            fontFamily: 'Oswald, serif',
             fontOpticalSizing: 'auto'
           },
         }}

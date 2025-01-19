@@ -1,0 +1,20 @@
+
+.description-helper {
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.3rem;
+}
+
+.description-helper h2,
+.description-helper p {
+  font-family: inherit;
+}
+
+.rightArrowPic {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 450px;  /* or whatever size you want */
+    height: auto;  /* maintains aspect ratio */
+}

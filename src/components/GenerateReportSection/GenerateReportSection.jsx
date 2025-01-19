@@ -12,7 +12,8 @@ import {
     Box,
     FormControl,
     InputLabel,
-  } from "@mui/material";
+} from "@mui/material";
+import rightArrow from '../../assets/right-arrow.png';
 
 function GenerateReportSection() {
     const chartRef = useRef(null);
@@ -76,7 +77,34 @@ function GenerateReportSection() {
 
     return (
         <>
-            <section>
+            <section style={{ position: 'relative', minHeight: '100px' }}>
+                    <Box className="description-helper" style={{ 
+                        position: 'absolute', 
+                        display: 'flex', 
+                        alignItems: 'center',
+                        height: '100%',         // This gives the flex container a height
+                        width: '33%',
+                        flexDirection: 'column',
+                        gap: '15px',
+                    }}>
+                        <h2>Visualize Your Spending</h2>
+                        <p>
+                            Ready to see where your money goes? Select a month and year to generate a detailed breakdown of your expenses. Our intuitive pie chart visualization makes it easy to understand your spending patterns at a glance.
+                        </p>
+                        <p>
+                            The chart will show you:
+                            <br></br>
+                            • How much you spent in each category
+                            <br></br>
+                            • Which areas are taking the biggest slice of your budget
+                            <br></br>
+                            • Your overall monthly expenditure
+                        </p>
+                        <p>
+                            Make smarter financial decisions by understanding your spending habits! 📊
+                        </p>
+                        <img src={rightArrow} alt="Right Arrow pointing to the form to fill, to add a new cost" className="rightArrowPic"/>
+                    </Box>
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
@@ -104,7 +132,7 @@ function GenerateReportSection() {
                         sx={{
                             '& .MuiInputLabel-root': {  // This targets the label
                               fontWeight: 400,
-                              fontFamily: '"Dancing Script", serif',
+                              fontFamily: 'Oswald, serif',
                               fontOpticalSizing: 'auto',
                             }
                           }}
