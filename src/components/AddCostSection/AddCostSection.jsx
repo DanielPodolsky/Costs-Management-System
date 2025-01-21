@@ -51,7 +51,7 @@ function AddCostSection() {
         amount: "",
         category: "",
         description: "",
-        date: null, // Reset date to null
+        date: '', // Reset date to null
         paymentMethod: "",
       });
       alert("Cost added successfully!");
